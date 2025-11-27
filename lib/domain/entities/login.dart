@@ -154,7 +154,19 @@ class Data {
     remainingItems = json['remaining_items'];
     _pushNotification = json['push_notification'];
     _firebaseAuth = json['firebase_auth'];
-    _verificationDocumentStatus = json['verification_document_status'];
+    final rawVerificationStatus = json['verification_document_status'];
+    if (rawVerificationStatus == null) {
+      _verificationDocumentStatus = null;
+    } else {
+      final s = rawVerificationStatus.toString().toLowerCase().trim();
+      if (s == '1' || s == 'approved' || s == 'true') {
+        _verificationDocumentStatus = 'approved';
+      } else if (s == '0' || s == 'pending' || s == 'false') {
+        _verificationDocumentStatus = 'pending';
+      } else {
+        _verificationDocumentStatus = s;
+      }
+    }
     _itemId = json['item_id'];
     _itemTypeId = json['item_type_id'];
   }

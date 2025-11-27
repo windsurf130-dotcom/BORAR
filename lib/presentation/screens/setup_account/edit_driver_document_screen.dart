@@ -73,7 +73,8 @@ class _EditDriverDocumentScreenState extends State<EditDriverDocumentScreen> {
                     stateAll.drivingLicenceBackStatus,
                   ];
 
-                  if (statusList.every((status) => status == "approved")) {
+                  if (statusList
+                      .every((status) => status.toString().toLowerCase() == "approved")) {
                     context.read<DocumentApprovedStatusCubit>().updateDocumentApprovedStatus(docApprovedStatus: "approved");
                     box.put("approved", true);
                   } else if (statusList.contains("rejected")) {

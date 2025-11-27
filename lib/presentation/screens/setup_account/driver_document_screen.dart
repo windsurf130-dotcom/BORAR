@@ -206,7 +206,8 @@ class _DriverDocumentScreenState extends State<DriverDocumentScreen> {
       stateAll.drivingLicenceBackStatus,
     ];
 
-    if (statusList.every((status) => status == "approved")) {
+    if (statusList
+        .every((status) => status.toString().toLowerCase() == "approved")) {
       context.read<DocumentApprovedStatusCubit>().updateDocumentApprovedStatus(docApprovedStatus: "approved");
       box.put("approved", true);
       loginModel!.data!.itemDocumentStatus="approved";
